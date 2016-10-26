@@ -30,8 +30,6 @@ export default function quizReducer (state = demoData, action){
       let editState = state.map( quiz => {
         if (quiz.title === action.quiz.title){
           quiz.questions.forEach( (question, i, list) =>{
-            console.log(question);
-            console.log(action.oldQuestion)
             if(question.question === action.oldQuestion.question){
               list.splice(i,1,action.newQuestion);
             }

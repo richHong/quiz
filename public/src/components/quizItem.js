@@ -15,7 +15,9 @@ class QuizItem extends Component {
     return (
       <div> 
         <h3>{this.props.quiz.title}</h3>
-        <span>{this.props.quiz.questions.length} Questions</span>
+        <label>Status: </label>{this.props.quiz.saved ? <span>Saved</span> : <span>NOT Saved</span>}
+        <br/><br/>
+        <label>Number of Questions: </label><span>{this.props.quiz.questions.length}</span>
         <br/><br/>
         <button onClick={e => this.takeQuiz()}>Take Quiz</button>
         <button onClick={e => this.addQuestion()}>Add Question</button>

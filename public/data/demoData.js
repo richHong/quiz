@@ -1,5 +1,6 @@
 const demoData = [{
   title: "Presidents of the USA",
+  saved: false,
   questions: [{
     question: "Who is the first President of the USA?",
     answer: "George Washington"
@@ -9,6 +10,7 @@ const demoData = [{
   }]
 }, {
   title: "US Capitols",
+  saved: false,
   questions: [{
     question: "What is the capitol of California",
     answer: "Sacramento"

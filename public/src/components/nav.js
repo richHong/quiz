@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { hashHistory} from 'react-router';
 
 function saveQuizzes(quizzes) {
   return new Promise((resolve, reject) => {
@@ -19,11 +20,18 @@ function saveQuizzes(quizzes) {
 class Nav extends Component {
   saveLocal(e) {
     e.preventDefault();
-    saveQuizzes(this.props.quizzes)
-    .then(()=> {
-      alert('Quizzes saved to localStorage');
+    this.props.quizzes.forEach(quiz =>{
+      quiz.saved = true;
     });
-    
+    saveQuizzes(this.props.quizzes)
+    .then((err) => {
+      if (err){
+        alert(err);
+      } else {
+        alert('Quizzes saved to localStorage');
+      }
+      hashHistory.push('/');
+    });
   }
   render() {
     return (
@@ -37,7 +45,7 @@ class Nav extends Component {
             <Link to='/addQuiz'>Add Quiz</Link>
           </li>
           <li>
-            <button onClick={e => this.saveLocal(e)}>Save to Local Storage</button>
+            <button onClick={e => this.saveLocal(e)}>Save All Quizzes</button>
           </li>
         </ul>
         <hr/>

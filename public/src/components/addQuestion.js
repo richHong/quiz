@@ -17,6 +17,7 @@ class AddQuestion extends Component {
     });
   }
   handleSubmit (e, question, answer) {
+    e.preventDefault();
     let newQuestion = {
       question: question.value,
       answer: answer.value

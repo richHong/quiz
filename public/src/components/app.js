@@ -7,7 +7,9 @@ class App extends Component {
   componentWillMount() {
     let quizzesJSON = window.localStorage.getItem('quizzes');
     let quizzes = JSON.parse(quizzesJSON);
-    this.props.dispatch(updateQuizList(quizzes));
+    if(quizzes){
+      this.props.dispatch(updateQuizList(quizzes));
+    }
   }
   render() {
     return (

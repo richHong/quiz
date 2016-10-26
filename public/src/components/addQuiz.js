@@ -8,7 +8,8 @@ class AddQuiz extends Component {
     e.preventDefault();
     let newQuiz = {
       title: title.value,
-      questions:[]
+      questions:[],
+      saved: false
     };
     this.props.dispatch(addQuiz(newQuiz));
     hashHistory.push('/');
