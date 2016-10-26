@@ -41,5 +41,4 @@ class QuizItem extends Component {
     );
   }
 };
-
 export default connect()(QuizItem);

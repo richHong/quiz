@@ -2,22 +2,7 @@ import React, { Component } from 'react';
 import { Link }             from 'react-router';
 import { connect }          from 'react-redux';
 import { browserHistory }   from 'react-router';
-import { getQuizList }      from '../actions/actions';
-
-function saveQuizzes(quizzes) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() < 0.1) {
-        return reject(new Error('Error: Quizzes failed to save.'));
-      }
-      quizzes.forEach(quiz =>{
-        quiz.saved = true;
-      });
-      window.localStorage.setItem('quizzes', JSON.stringify(quizzes));
-      return resolve();
-    }, Math.random() * 1000);
-  });
-}
+import { saveQuizList }      from '../actions/actions';
 
 class Nav extends Component {
   constructor(props) {
@@ -29,15 +14,9 @@ class Nav extends Component {
   saveLocal(e) {
     e.preventDefault();
     this.setState({spinner:true}, () => {
-      saveQuizzes(this.props.quizzes)
-      .then( () => {
-          this.setState({spinner: false});
-          this.props.dispatch(getQuizList());
-          browserHistory.push('/');
-      }) 
-      .catch( () => {
-          this.setState({spinner: false});
-          alert('Error: Quizzes NOT Saved! Please try saving again.');
+      this.props.dispatch(saveQuizList(this.props.quizzes))
+      .then(() => {
+        this.setState({spinner:false});
       });
     });
   }
