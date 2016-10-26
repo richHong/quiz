@@ -26,7 +26,11 @@ class Nav extends Component {
     saveQuizzes(this.props.quizzes)
     .then( () => {
         alert('Quizzes saved to localStorage');
-        window.location.reload();
+        if(window.location.hash === '#/'){
+          window.location.reload();
+        } else {
+          hashHistory.push('/');
+        }
     }) 
     .catch( () => {
         alert('Error! Quizzes not saved');

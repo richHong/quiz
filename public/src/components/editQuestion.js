@@ -38,7 +38,7 @@ class EditQuestion extends Component {
     return (
       <div>
       <h3>{this.state.currentQuiz.title}</h3>
-      {this.state.currentQuiz.questions.map((question, i) => {
+      {this.state.currentQuiz.questions.length ? this.state.currentQuiz.questions.map((question, i) => {
         return (
           <div key={i}>
             <form onSubmit={e => this.updateChanges(e, this.question, this.answer, question)}>
@@ -56,7 +56,7 @@ class EditQuestion extends Component {
             <hr/>
           </div>
         )
-      })}
+      }) : <h4>No Questions to Edit</h4>}
       </div>
     );
   }
