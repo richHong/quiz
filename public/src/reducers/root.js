@@ -14,7 +14,7 @@ export default function quizReducer (state = demoData, action){
       });
       
     case 'ADD_QUIZ':
-      return [...state, action.quiz];
+      return [action.quiz,...state];
     case 'REMOVE_QUESTION':
       return state.map( quiz => {
         if (quiz.title === action.quiz.title){

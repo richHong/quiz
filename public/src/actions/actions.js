@@ -12,9 +12,10 @@ function getQuizzes() {
 function saveQuizzes(quizzes) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (Math.random() < 0.1) {
-        return reject(new Error('Faile to save quizzes. Attempting to save again...'));
+      if (Math.random() < 0.1 || !quizzes) {
+        return reject(new Error('Failed to save quizzes. Attempting to save again...'));
       }
+      console.log('inside save',quizzes);
       quizzes.forEach(quiz =>{
         quiz.saved = true;
       });
@@ -24,27 +25,29 @@ function saveQuizzes(quizzes) {
   });
 }
 export function saveQuizList(quizzes){
-  return function (dispatch) {
-    return saveQuizzes(quizzes).then(
+  return dispatch => {
+    return saveQuizzes(quizzes)
+    .then(
       () => {
         dispatch(getQuizList());
       }, 
       error => {
         alert(error);
         setTimeout(() => dispatch(saveQuizList()), 2000);
-      });
+    });
   };
 }
 export function getQuizList(){
-  return function (dispatch) {
-    return getQuizzes().then(
+  return dispatch => {
+    return getQuizzes()
+    .then(
       quizzes => {
         dispatch(updateQuizList(quizzes));
       }, 
       error => {
         alert(error);
         setTimeout(() => dispatch(getQuizList()), 2000);
-      });
+    });
   };
 }
 export function updateQuizList (quizList) {
@@ -53,14 +56,12 @@ export function updateQuizList (quizList) {
     quizList
   };
 }
-
 export function addQuiz (quiz) {
   return {
     type: 'ADD_QUIZ',
     quiz
   };
 }
-
 export function addQuestion(question, quiz) {
   return {
     type: 'ADD_QUESTION',
@@ -68,7 +69,6 @@ export function addQuestion(question, quiz) {
     quiz
   };
 }
-
 export function editQuestion(newQuestion, oldQuestion, quiz) {
   return {
     type: 'EDIT_QUESTION',
@@ -77,7 +77,6 @@ export function editQuestion(newQuestion, oldQuestion, quiz) {
     quiz
   };
 }
-
 export function removeQuestion(question, quiz) {
   return {
     type: 'REMOVE_QUESTION',
@@ -85,7 +84,6 @@ export function removeQuestion(question, quiz) {
     quiz
   };
 }
-
 export function removeQuiz(quiz) {
   return {
     type: 'REMOVE_QUIZ',
