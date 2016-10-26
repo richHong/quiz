@@ -11,6 +11,9 @@ function saveQuizzes(quizzes) {
         return reject(new Error('Error: Quizzes randomly failed to save'));
       }
       // pretend the save succeeded
+    quizzes.forEach(quiz =>{
+      quiz.saved = true;
+    });
       window.localStorage.setItem('quizzes', JSON.stringify(quizzes));
       return resolve();
     }, Math.random() * 1000);
@@ -26,23 +29,21 @@ class Nav extends Component {
   }
   saveLocal(e) {
     e.preventDefault();
-    this.props.quizzes.forEach(quiz =>{
-      quiz.saved = true;
-    });
-    this.setState({spinner:true});
-    saveQuizzes(this.props.quizzes)
-    .then( () => {
-        this.setState({spinner: false});
-        alert('Quizzes saved to localStorage');
-        if(window.location.hash === '#/'){
-          window.location.reload();
-        } else {
-          hashHistory.push('/');
-        }
-    }) 
-    .catch( () => {
-        this.setState({spinner: false});
-        alert('Error! Quizzes not saved');
+    this.setState({spinner:true}, () => {
+      saveQuizzes(this.props.quizzes)
+      .then( () => {
+          this.setState({spinner: false});
+          alert('Hooray! All Quizzes Saved!');
+          if(window.location.hash === '#/'){
+            window.location.reload();
+          } else {
+            hashHistory.push('/');
+          }
+      }) 
+      .catch( () => {
+          this.setState({spinner: false});
+          alert('Error! Quizzes NOT Saved!');
+      });
     });
   }
   render() {
@@ -56,10 +57,8 @@ class Nav extends Component {
           <li>
             <Link to='/addQuiz'>Add Quiz</Link>
           </li>
-          <li>
-            <button onClick={e => this.saveLocal(e)}>Save All Quizzes</button>
-          </li>
         </ul>
+            <button onClick={e => this.saveLocal(e)}>Save All Quizzes</button>
         {this.state.spinner ? <img className='spinner'src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif'/> : null}
         <hr/>
       </div>

@@ -18,7 +18,9 @@ class AddQuestion extends Component {
   }
   handleSubmit (e, question, answer) {
     e.preventDefault();
+    let num = this.state.currentQuiz.questions.length;
     let newQuestion = {
+      id: num + 1,
       question: question.value,
       answer: answer.value
     };

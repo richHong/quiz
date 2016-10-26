@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editQuestion, removeQuestion } from '../actions/actions';
 import { hashHistory} from 'react-router';
+import ReactDOM from 'react-dom';
 
 class EditQuestion extends Component {
   constructor(props){
@@ -16,47 +17,55 @@ class EditQuestion extends Component {
       }
     });
   }
-  updateChanges(e, question, answer, oldQuestion) {
+  updateChanges(e, oldQuestion) {
     e.preventDefault();
+    let question = ReactDOM.findDOMNode(this.refs[`${oldQuestion.id}-question`]);
+    let answer = ReactDOM.findDOMNode(this.refs[`${oldQuestion.id}-answer`]);
     let newQuestion = {
+      id: oldQuestion.id,
       question: question.value,
       answer: answer.value
     };
     this.props.dispatch(editQuestion(newQuestion, oldQuestion, this.state.currentQuiz));
     hashHistory.push('/');
   }
-  remove (e, question, answer) {
-    e.preventDefault();
-    let newQuestion = {
-      question: question.value,
-      answer: answer.value
-    };
-    this.props.dispatch(removeQuestion(newQuestion, this.state.currentQuiz));
-    hashHistory.push('/');
+  remove (e, id) {
+    if(confirm('Are you sure you want to remove this question?')) {
+      e.preventDefault();
+      let question = ReactDOM.findDOMNode(this.refs[`${id}-question`]);
+      let answer = ReactDOM.findDOMNode(this.refs[`${id}-answer`]);
+      let newQuestion = {
+        id,
+        question: question.value,
+        answer: answer.value
+      };
+      this.props.dispatch(removeQuestion(newQuestion, this.state.currentQuiz));
+      hashHistory.push('/');
+    }
   }
   render() {
     return (
       <div>
       <h3>{this.state.currentQuiz.title}</h3>
-      {this.state.currentQuiz.questions.length ? this.state.currentQuiz.questions.map((question, i) => {
+      {this.state.currentQuiz.questions.map((question, i) => {
         return (
           <div key={i}>
-            <form onSubmit={e => this.updateChanges(e, this.question, this.answer, question)}>
+            <form onSubmit={e => this.updateChanges(e, question)}>
               <label>Question:</label>
               <br/>
-              <input type='text' defaultValue={question.question} ref={input => this.question = input}/>
+              <input className='inputs' type='text' defaultValue={question.question} ref={`${question.id}-question`}/>
               <br/>
               <label>Answer:</label>
               <br/>
-              <input type='text' defaultValue={question.answer} ref={input => this.answer = input}/>
+              <input className='inputs' type='text' defaultValue={question.answer} ref={`${question.id}-answer`}/>
               <br/>
-              <input type="submit"/>
-              <button onClick={e => this.remove(e, this.question, this.answer)}>Remove Question</button>
+              <input type='submit' value ='Save Changes'/>
+              <button onClick={e => this.remove(e, question.id)}>Remove Question</button>
             </form>
             <hr/>
           </div>
         )
-      }) : <h4>No Questions to Edit</h4>}
+      })}
       </div>
     );
   }

@@ -14,7 +14,9 @@ class QuizItem extends Component {
     hashHistory.push(`/editQuestion/${this.props.quiz.title}`);
   }
   removeQuiz (quiz) {
-    this.props.dispatch(removeQuiz(quiz));
+    if(confirm('Are you sure you want to remove this quiz?')){
+      this.props.dispatch(removeQuiz(quiz));
+    }
   }
   render() {
     return (
@@ -22,11 +24,17 @@ class QuizItem extends Component {
         <h3>{this.props.quiz.title}</h3>
         <label>Status: </label>{this.props.quiz.saved ? <span>Saved</span> : <span>NOT Saved</span>}
         <br/><br/>
-        <label>Number of Questions: </label><span>{this.props.quiz.questions.length}</span>
-        <br/><br/>
+        <label>Questions:</label>
+        <ol>
+          {this.props.quiz.questions.map((question, i) => {
+            return (
+              <li key={i}>{question.question}</li>
+            );
+          })}
+        </ol>
         {this.props.quiz.questions.length ? <button onClick={e => this.takeQuiz()}>Take Quiz</button> : null}
+        {this.props.quiz.questions.length ? <button onClick={e => this.editQuestion()}>Edit Questions</button> : null}
         <button onClick={e => this.addQuestion()}>Add Question</button>
-        <button onClick={e => this.editQuestion()}>Edit Questions</button>
         <button onClick={e => this.removeQuiz(this.props.quiz)}>Remove Quiz</button>
         <hr/>
       </div>

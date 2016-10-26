@@ -18,7 +18,7 @@ export default function quizReducer (state = demoData, action){
       let removeState = state.map( quiz => {
         if (quiz.title === action.quiz.title){
           let newQuestions = quiz.questions.filter( (question, i, list) =>{
-            return question.question === action.question.question;
+            return question.id !== action.question.id;
           });
           quiz.questions = newQuestions;
         }
@@ -29,7 +29,7 @@ export default function quizReducer (state = demoData, action){
       let editState = state.map( quiz => {
         if (quiz.title === action.quiz.title){
           quiz.questions.forEach( (question, i, list) =>{
-            if(question.question === action.oldQuestion.question){
+            if(question.id === action.oldQuestion.id){
               list.splice(i,1,action.newQuestion);
             }
           });
