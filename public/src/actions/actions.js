@@ -15,7 +15,6 @@ function saveQuizzes(quizzes) {
       if (Math.random() < 0.1 || !quizzes) {
         return reject(new Error('Failed to save quizzes. Attempting to save again...'));
       }
-      console.log('inside save',quizzes);
       quizzes.forEach(quiz =>{
         quiz.saved = true;
       });
