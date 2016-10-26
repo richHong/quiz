@@ -19,7 +19,7 @@ class QuizItem extends Component {
         <br/><br/>
         <label>Number of Questions: </label><span>{this.props.quiz.questions.length}</span>
         <br/><br/>
-        <button onClick={e => this.takeQuiz()}>Take Quiz</button>
+        {this.props.quiz.questions.length ? <button onClick={e => this.takeQuiz()}>Take Quiz</button> : null}
         <button onClick={e => this.addQuestion()}>Add Question</button>
         <button onClick={e => this.editQuestion()}>Edit Questions</button>
         <hr/>
