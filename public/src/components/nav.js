@@ -18,13 +18,21 @@ function saveQuizzes(quizzes) {
 }
 
 class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      spinner: false,
+    };
+  }
   saveLocal(e) {
     e.preventDefault();
     this.props.quizzes.forEach(quiz =>{
       quiz.saved = true;
     });
+    this.setState({spinner:true});
     saveQuizzes(this.props.quizzes)
     .then( () => {
+        this.setState({spinner: false});
         alert('Quizzes saved to localStorage');
         if(window.location.hash === '#/'){
           window.location.reload();
@@ -33,6 +41,7 @@ class Nav extends Component {
         }
     }) 
     .catch( () => {
+        this.setState({spinner: false});
         alert('Error! Quizzes not saved');
     });
   }
@@ -51,6 +60,7 @@ class Nav extends Component {
             <button onClick={e => this.saveLocal(e)}>Save All Quizzes</button>
           </li>
         </ul>
+        {this.state.spinner ? <img className='spinner'src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif'/> : null}
         <hr/>
       </div>
       );
