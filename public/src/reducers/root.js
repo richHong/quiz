@@ -8,6 +8,7 @@ export default function quizReducer (state = demoData, action){
       let newState = state.map( quiz => {
         if (quiz.title === action.quiz.title){
           quiz.questions.push(action.question);
+          quiz.saved = false;
         }
         return quiz;
       });
@@ -21,6 +22,7 @@ export default function quizReducer (state = demoData, action){
             return question.id !== action.question.id;
           });
           quiz.questions = newQuestions;
+          quiz.saved = false;
         }
         return quiz;
       });
@@ -31,6 +33,7 @@ export default function quizReducer (state = demoData, action){
           quiz.questions.forEach( (question, i, list) =>{
             if(question.id === action.oldQuestion.id){
               list.splice(i,1,action.newQuestion);
+              quiz.saved = false;
             }
           });
         }
