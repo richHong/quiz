@@ -18,9 +18,9 @@ class AddQuestion extends Component {
   }
   handleSubmit (e, question, answer) {
     e.preventDefault();
-    let num = this.state.currentQuiz.questions.length;
+    let num = Math.random() * 1000000;
     let newQuestion = {
-      id: num + 1,
+      id: num,
       question: question.value,
       answer: answer.value
     };
