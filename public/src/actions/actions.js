@@ -36,3 +36,10 @@ export function removeQuestion(question, quiz) {
     quiz
   };
 }
+
+export function removeQuiz(quiz) {
+  return {
+    type: 'REMOVE_QUIZ',
+    quiz
+  };
+}

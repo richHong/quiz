@@ -17,11 +17,10 @@ export default function quizReducer (state = demoData, action){
     case 'REMOVE_QUESTION':
       let removeState = state.map( quiz => {
         if (quiz.title === action.quiz.title){
-          quiz.questions.forEach( (question, i, list) =>{
-            if(question.question === action.question.question){
-              list.splice(i,1);
-            }
+          let newQuestions = quiz.questions.filter( (question, i, list) =>{
+            return question.question === action.question.question;
           });
+          quiz.questions = newQuestions;
         }
         return quiz;
       });
@@ -38,6 +37,11 @@ export default function quizReducer (state = demoData, action){
         return quiz;
       });
       return editState;
+    case 'REMOVE_QUIZ':
+      let quizState = state.filter( quiz => {
+        return quiz.title !== action.quiz.title;
+      });
+      return quizState;
     default:
       return state;
   };

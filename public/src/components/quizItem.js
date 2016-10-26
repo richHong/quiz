@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, hashHistory} from 'react-router';
+import { removeQuiz } from '../actions/actions';
+import { connect } from 'react-redux';
 
 class QuizItem extends Component {
   takeQuiz () {
@@ -10,6 +12,9 @@ class QuizItem extends Component {
   }
   editQuestion () {
     hashHistory.push(`/editQuestion/${this.props.quiz.title}`);
+  }
+  removeQuiz (quiz) {
+    this.props.dispatch(removeQuiz(quiz));
   }
   render() {
     return (
@@ -22,11 +27,11 @@ class QuizItem extends Component {
         {this.props.quiz.questions.length ? <button onClick={e => this.takeQuiz()}>Take Quiz</button> : null}
         <button onClick={e => this.addQuestion()}>Add Question</button>
         <button onClick={e => this.editQuestion()}>Edit Questions</button>
+        <button onClick={e => this.removeQuiz(this.props.quiz)}>Remove Quiz</button>
         <hr/>
       </div>
       );
-
   }
 };
 
-export default QuizItem;
+export default connect()(QuizItem);
