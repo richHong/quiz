@@ -1,9 +1,16 @@
 .spinner {
-  height: 100px;
+  height: 40px;
   position: absolute;
-  z-index: 100;
-  top: 0;
-  left: 20%;
+  top: 17%;
+  left: 15%;
+  
+}
+@media screen and (max-width: 480px) {
+    .spinner {
+      height: 25px
+      top: 15%;
+      left: 30%;
+  }
 }
 .inputs {
   width: 50vw;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import QuizItem from './quizItem';
+import QuizItem             from './quizItem';
 
 class QuizList extends Component {
   render(){
@@ -8,11 +8,10 @@ class QuizList extends Component {
         {this.props.quizzes.map( (quiz, i) => {
           return (
             <QuizItem key={i} quiz={quiz} />
-            )
+          );
         })}
       </div>
-      );
+    );
   }
 };
-
 export default QuizList;

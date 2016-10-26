@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import QuizList from './quizList';
-import { connect } from 'react-redux';
+import { connect }          from 'react-redux';
+import QuizList             from './quizList';
 
 class Home extends Component {
   render(){
@@ -16,4 +16,4 @@ function mapStateToProps(state) {
     quizzes: state
   }
 }
-export default connect (mapStateToProps) (Home);
+export default connect (mapStateToProps)(Home);

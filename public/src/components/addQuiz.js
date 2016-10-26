@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { addQuiz } from '../actions/actions';
-import { connect } from 'react-redux';
-import { hashHistory} from 'react-router';
+import { connect }          from 'react-redux';
+import { browserHistory }   from 'react-router';
+import { addQuiz }          from '../actions/actions';
 
 class AddQuiz extends Component {
   handleSubmit (e, title) {
@@ -12,7 +12,7 @@ class AddQuiz extends Component {
       saved: false
     };
     this.props.dispatch(addQuiz(newQuiz));
-    hashHistory.push('/');
+    browserHistory.push('/');
   }
   render(){
     return (
@@ -20,12 +20,12 @@ class AddQuiz extends Component {
         <form onSubmit={e => this.handleSubmit(e, this.title)}>
           <label>Quiz Title:</label>
           <br/>
-          <input type='text' placeholder='Enter Title of Quiz' ref={input => this.title = input}/>
-          <br/>
-          <input type='submit'/>
+          <input style={{width: '30vw'}} type='text' required placeholder='Enter Title of Quiz' ref={input => this.title = input}/>
+          <br/><br/>
+          <input type='submit' value='Add Quiz'/>
         </form>
       </div>
-      );
+    );
   }
 };
 export default connect() (AddQuiz);

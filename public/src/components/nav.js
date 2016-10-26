@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { hashHistory} from 'react-router';
+import { Link }             from 'react-router';
+import { connect }          from 'react-redux';
+import { browserHistory }   from 'react-router';
+import { getQuizList }      from '../actions/actions';
 
 function saveQuizzes(quizzes) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() < 0.1) {
-        // pretend the save failed
-        return reject(new Error('Error: Quizzes randomly failed to save'));
+        return reject(new Error('Error: Quizzes failed to save.'));
       }
-      // pretend the save succeeded
-    quizzes.forEach(quiz =>{
-      quiz.saved = true;
-    });
+      quizzes.forEach(quiz =>{
+        quiz.saved = true;
+      });
       window.localStorage.setItem('quizzes', JSON.stringify(quizzes));
       return resolve();
     }, Math.random() * 1000);
@@ -33,23 +32,19 @@ class Nav extends Component {
       saveQuizzes(this.props.quizzes)
       .then( () => {
           this.setState({spinner: false});
-          alert('Hooray! All Quizzes Saved!');
-          if(window.location.hash === '#/'){
-            window.location.reload();
-          } else {
-            hashHistory.push('/');
-          }
+          this.props.dispatch(getQuizList());
+          browserHistory.push('/');
       }) 
       .catch( () => {
           this.setState({spinner: false});
-          alert('Error! Quizzes NOT Saved!');
+          alert('Error: Quizzes NOT Saved! Please try saving again.');
       });
     });
   }
   render() {
     return (
       <div>
-        <h3>The Quiz Game</h3>
+        <h1>The Quiz Game</h1>
         <ul>
           <li>
             <Link to='/'>Home</Link>
@@ -59,10 +54,10 @@ class Nav extends Component {
           </li>
         </ul>
             <button onClick={e => this.saveLocal(e)}>Save All Quizzes</button>
-        {this.state.spinner ? <img className='spinner'src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif'/> : null}
+        {this.state.spinner ? <img className='spinner'src='https://shortpixel.com/img/spinner2.gif'/> : null}
         <hr/>
       </div>
-      );
+    );
   }
 };
 function mapStateToProps(state){

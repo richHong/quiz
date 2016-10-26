@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Nav from './nav';
-import { updateQuizList } from '../actions/actions';
+import { connect }          from 'react-redux';
+import { getQuizList }      from '../actions/actions';
+import Nav                  from './nav';
 
 class App extends Component {
   componentWillMount() {
-    let quizzesJSON = window.localStorage.getItem('quizzes');
-    let quizzes = JSON.parse(quizzesJSON);
-    if(quizzes){
-      this.props.dispatch(updateQuizList(quizzes));
+    if(window.localStorage.quizzes){
+      this.props.dispatch(getQuizList());
     }
   }
   render() {
@@ -17,8 +15,8 @@ class App extends Component {
         <Nav />
         {this.props.children}
       </div>
-    )
+    );
   }
-}
+};
 
 export default connect()(App);

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { hashHistory} from 'react-router';
+import { connect }          from 'react-redux';
+import { Link }             from 'react-router';
 
 class Quiz extends Component {
   constructor(props) {
@@ -11,7 +10,8 @@ class Quiz extends Component {
       currentQuiz: {},
       correct: false,
       answered: false,
-      end: false
+      end: false,
+      score: 0
     };
   }
   componentWillMount () {
@@ -25,9 +25,9 @@ class Quiz extends Component {
   checkAnswer(e, answer) {
     e.preventDefault();
     let val = answer.value;
-    let {currentQuiz, index, correct, answered } = this.state;
+    let {currentQuiz, index, score } = this.state;
     if (currentQuiz.questions[index].answer.toLowerCase() === val.toLowerCase()) {
-      this.setState({answered:true, correct: true});
+      this.setState({answered:true, correct: true, score: score + 1});
       answer.value = '';
     } else {
       this.setState({answered:true});
@@ -42,23 +42,24 @@ class Quiz extends Component {
     }
   }
   render () {
-    let {currentQuiz, index, correct, answered, end } = this.state;
+    let {currentQuiz, index, correct, answered, end, score } = this.state;
     return (
       <div>
-        {this.props.quizzes.length ? 
         <div>
+          <h1>{currentQuiz.title}</h1>
           <h2>Question #{index + 1}</h2>
           <h3>{currentQuiz.questions[index].question}</h3> 
           <form onSubmit={e => this.checkAnswer(e, this.answer)}>
-            <input type="text" placeholder="Enter your answer" ref={input => this.answer = input}/>
+            <input style={{width: '30vw'}} type="text" placeholder="Enter your answer" ref={input => this.answer = input}/>
             <input type="submit" />
           </form>
-        </div> : null }
-        {correct && answered ? <span>You are correct</span> : answered && !correct ? <span>Wrong Answer</span> : null}
-        {correct && answered ? <button onClick={e => this.nextQuestion()}>Next Question</button> : null}
-        {end ? <Link to='/'><button>Try Another Quiz</button></Link> : null}
+        </div> 
+        <br/>
+        {correct && answered ? <span>You are correct! </span> : answered && !correct ? <span>Wrong answer! </span> : null}
+        {correct && answered ? <button onClick={e => this.nextQuestion()}>Next Question</button> : answered && !correct ? <button onClick={e => this.nextQuestion()}>Skip Question</button> : null}
+        {end ? <div><span>You have finished the quiz. You answered {score} out of {currentQuiz.questions.length} questions correctly ({score / currentQuiz.questions.length * 100}%) </span><Link to='/'><button>Try Another Quiz</button></Link></div> : null}
       </div>
-      );
+    );
   }
 };
 function mapStateToProps (state) {

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, hashHistory} from 'react-router';
-import { removeQuiz } from '../actions/actions';
-import { connect } from 'react-redux';
+import { browserHistory }   from 'react-router';
+import { connect }          from 'react-redux';
+import { removeQuiz }       from '../actions/actions';
 
 class QuizItem extends Component {
   takeQuiz () {
-    hashHistory.push(`/quiz/${this.props.quiz.title}`);
+    browserHistory.push(`/quiz/${this.props.quiz.title}`);
   }
   addQuestion () {
-    hashHistory.push(`/addQuestion/${this.props.quiz.title}`);
+    browserHistory.push(`/addQuestion/${this.props.quiz.title}`);
   }
   editQuestion () {
-    hashHistory.push(`/editQuestion/${this.props.quiz.title}`);
+    browserHistory.push(`/editQuestion/${this.props.quiz.title}`);
   }
   removeQuiz (quiz) {
     if(confirm('Are you sure you want to remove this quiz?')){
@@ -21,7 +21,7 @@ class QuizItem extends Component {
   render() {
     return (
       <div> 
-        <h3>{this.props.quiz.title}</h3>
+        <h2>{this.props.quiz.title}</h2>
         <label>Status: </label>{this.props.quiz.saved ? <span>Saved</span> : <span>NOT Saved</span>}
         <br/><br/>
         <label>Questions:</label>
@@ -38,7 +38,7 @@ class QuizItem extends Component {
         <button onClick={e => this.removeQuiz(this.props.quiz)}>Remove Quiz</button>
         <hr/>
       </div>
-      );
+    );
   }
 };
 

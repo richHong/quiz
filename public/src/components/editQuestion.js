@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { findDOMNode }      from 'react-dom';
+import { connect }          from 'react-redux';
+import { browserHistory }   from 'react-router';
 import { editQuestion, removeQuestion } from '../actions/actions';
-import { hashHistory} from 'react-router';
-import ReactDOM from 'react-dom';
 
 class EditQuestion extends Component {
   constructor(props){
@@ -19,34 +19,34 @@ class EditQuestion extends Component {
   }
   updateChanges(e, oldQuestion) {
     e.preventDefault();
-    let question = ReactDOM.findDOMNode(this.refs[`${oldQuestion.id}-question`]);
-    let answer = ReactDOM.findDOMNode(this.refs[`${oldQuestion.id}-answer`]);
+    let question = findDOMNode(this.refs[`${oldQuestion.id}-question`]);
+    let answer   = findDOMNode(this.refs[`${oldQuestion.id}-answer`]);
     let newQuestion = {
       id: oldQuestion.id,
       question: question.value,
       answer: answer.value
     };
     this.props.dispatch(editQuestion(newQuestion, oldQuestion, this.state.currentQuiz));
-    hashHistory.push('/');
+    browserHistory.push('/');
   }
   remove (e, id) {
     if(confirm('Are you sure you want to remove this question?')) {
       e.preventDefault();
-      let question = ReactDOM.findDOMNode(this.refs[`${id}-question`]);
-      let answer = ReactDOM.findDOMNode(this.refs[`${id}-answer`]);
+      let question = findDOMNode(this.refs[`${id}-question`]);
+      let answer   = findDOMNode(this.refs[`${id}-answer`]);
       let newQuestion = {
         id,
         question: question.value,
         answer: answer.value
       };
       this.props.dispatch(removeQuestion(newQuestion, this.state.currentQuiz));
-      hashHistory.push('/');
+      browserHistory.push('/');
     }
   }
   render() {
     return (
       <div>
-      <h3>{this.state.currentQuiz.title}</h3>
+      <h1>{this.state.currentQuiz.title}</h1>
       {this.state.currentQuiz.questions.map((question, i) => {
         return (
           <div key={i}>
@@ -54,11 +54,11 @@ class EditQuestion extends Component {
               <label>Question:</label>
               <br/>
               <input className='inputs' type='text' defaultValue={question.question} ref={`${question.id}-question`}/>
-              <br/>
+              <br/><br/>
               <label>Answer:</label>
               <br/>
               <input className='inputs' type='text' defaultValue={question.answer} ref={`${question.id}-answer`}/>
-              <br/>
+              <br/><br/>
               <input type='submit' value ='Save Changes'/>
               <button onClick={e => this.remove(e, question.id)}>Remove Question</button>
             </form>

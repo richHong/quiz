@@ -1,3 +1,26 @@
+function getQuizzes() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() < 0.1) {
+        return reject(new Error('Failed to get Quiz List. Attempting to connect again...'));
+      }
+      let quizList = JSON.parse(window.localStorage.getItem('quizzes'));
+      return resolve(quizList);
+    }, Math.random() * 1000);
+  });
+}
+export function getQuizList(){
+  return function (dispatch) {
+    return getQuizzes().then(
+      quizzes => {
+        dispatch(updateQuizList(quizzes));
+      }, 
+      error => {
+        alert(error);
+        setTimeout(() => dispatch(getQuizList()), 1000);
+      });
+  };
+}
 export function updateQuizList (quizList) {
   return {
     type: 'UPDATE_QUIZ_LIST',
