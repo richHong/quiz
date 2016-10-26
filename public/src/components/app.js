@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Nav from './nav';
+import { updateQuizList } from '../actions/actions';
 
 class App extends Component {
+  componentWillMount() {
+    let quizzesJSON = window.localStorage.getItem('quizzes');
+    let quizzes = JSON.parse(quizzesJSON);
+    this.props.dispatch(updateQuizList(quizzes));
+  }
   render() {
     return (
-      <div>{this.props.example}</div>
+      <div>
+        <Nav />
+        {this.props.children}
+      </div>
     )
   }
 }
-function mapStateToProps(state){
-  return {
-    example: state.example
-  }
-}
-export default connect(mapStateToProps)(App);
+
+export default connect()(App);
