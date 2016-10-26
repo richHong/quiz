@@ -24,13 +24,12 @@ class Nav extends Component {
       quiz.saved = true;
     });
     saveQuizzes(this.props.quizzes)
-    .then((err) => {
-      if (err){
-        alert(err);
-      } else {
+    .then( () => {
         alert('Quizzes saved to localStorage');
-      }
-      hashHistory.push('/');
+        window.location.reload();
+    }) 
+    .catch( () => {
+        alert('Error! Quizzes not saved');
     });
   }
   render() {
