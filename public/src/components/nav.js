@@ -29,7 +29,7 @@ class Nav extends Component {
             <Link to='/'><i className="fa fa-home fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Home</span></i></Link>
           </li>
           <li>
-            <Link to='/addQuiz'><i className="fa fa-plus-square fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Add Quiz</span></i></Link>
+            <Link to='/addQuiz'><i className="fa fa-plus fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Add Quiz</span></i></Link>
           </li>
           <li>
             <div onClick={e => this.saveLocal(e)}><i className="fa fa-floppy-o fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Save Quizzes</span></i></div>
