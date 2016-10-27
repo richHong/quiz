@@ -13,7 +13,7 @@ function saveQuizzes(quizzes) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() < 0.1 || !quizzes) {
-        return reject(new Error('Failed to save quizzes. Attempting to save again...'));
+        return reject(new Error('Failed to save quizzes. Please try saving again...'));
       }
       quizzes.forEach(quiz =>{
         quiz.saved = true;
@@ -32,7 +32,6 @@ export function saveQuizList(quizzes){
       }, 
       error => {
         alert(error);
-        setTimeout(() => dispatch(saveQuizList()), 2000);
     });
   };
 }
