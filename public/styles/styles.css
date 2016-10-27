@@ -60,8 +60,43 @@ ul {
     border-style: solid;
     border-color: #555 transparent transparent transparent;
 }
-
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+body {
+  font-family: Roboto;
+  background-color: black;
+}
+button {
+  height: 5vh;
+  width: 20vh;
+  font-family: Roboto;
+  font-size: 70%;
+  border-radius: 5%;
+  margin: 1em;
+  background-color: white;
+}
+#app {
+  max-width: 650px;
+  margin: 0 auto;
+  background-color: white;
+  border: 3px dotted black;
+  height: 100vh;
+  overflow: scroll;
+  padding: 20px;
+}
+input[type='submit'] {
+  height: 5vh;
+  width: 20vh;
+  font-family: Roboto;
+  font-size: 70%;
+  border-radius: 5%;
+  margin: 1em;
+  background-color: white;
+}
+input[type='text'] {
+  height: 5vh;
+  font-family: Roboto;
+  font-size: 2vh;
 }

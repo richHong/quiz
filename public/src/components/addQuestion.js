@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { browserHistory }   from 'react-router';
+import { hashHistory }   from 'react-router';
 import { addQuestion }      from '../actions/actions';
 
 class AddQuestion extends Component {
@@ -25,7 +25,7 @@ class AddQuestion extends Component {
       answer: answer.value
     };
     this.props.dispatch(addQuestion(newQuestion, this.state.currentQuiz));
-    browserHistory.push('/');
+    hashHistory.push('/');
   }
   render(){
     return (
@@ -35,13 +35,13 @@ class AddQuestion extends Component {
         <h3>Add a Question</h3>
           <label>Question:</label>
           <br/>
-          <input type='text' ref={input => this.question = input} required />
-          <br/>
+          <input style={{width: '30vw'}} type='text' ref={input => this.question = input} required />
+          <br/><br/>
           <label>Answer:</label>
           <br/>
-          <input type='text' ref={input => this.answer = input} required />
-          <br/>
-          <input type='submit' />
+          <input style={{width: '30vw'}} type='text' ref={input => this.answer = input} required />
+          <br/><br/>
+          <input type='submit' value='Add Question'/>
         </form>
       </div>
     );

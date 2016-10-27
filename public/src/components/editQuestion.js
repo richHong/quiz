@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode }      from 'react-dom';
 import { connect }          from 'react-redux';
-import { browserHistory }   from 'react-router';
+import { hashHistory }   from 'react-router';
 import { editQuestion, removeQuestion } from '../actions/actions';
 
 class EditQuestion extends Component {
@@ -27,7 +27,7 @@ class EditQuestion extends Component {
       answer: answer.value
     };
     this.props.dispatch(editQuestion(newQuestion, oldQuestion, this.state.currentQuiz));
-    browserHistory.push('/');
+    hashHistory.push('/');
   }
   remove (e, id) {
     if(confirm('Are you sure you want to remove this question?')) {
@@ -40,7 +40,7 @@ class EditQuestion extends Component {
         answer: answer.value
       };
       this.props.dispatch(removeQuestion(newQuestion, this.state.currentQuiz));
-      browserHistory.push('/');
+      hashHistory.push('/');
     }
   }
   render() {

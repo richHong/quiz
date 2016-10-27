@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link }             from 'react-router';
 import { connect }          from 'react-redux';
-import { browserHistory }   from 'react-router';
 import { saveQuizList }      from '../actions/actions';
 
 class Nav extends Component {
@@ -22,7 +21,7 @@ class Nav extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='nav-container'>
         <h1>The Quiz Game</h1>
         <ul className='nav'>
           <li>

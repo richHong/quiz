@@ -3,7 +3,7 @@ import thunk                from 'redux-thunk';
 import { render }           from 'react-dom';
 import { Provider }         from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, Route, browserHistory} from 'react-router';
+import { Router, Route, hashHistory} from 'react-router';
 
 import quizReducer from './public/src/reducers/root';
 
@@ -18,7 +18,7 @@ import EditQuestion from './public/src/components/editQuestion';
 let store = createStore(quizReducer, applyMiddleware(thunk));
 
 render(<Provider store={ store }>
-        <Router history={ browserHistory }>
+        <Router history={ hashHistory }>
           <Route component={ App }>
             <Route path='/' component={ Home } />
             <Route path='/addQuiz' component={ AddQuiz } />

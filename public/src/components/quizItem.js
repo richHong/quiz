@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { browserHistory }   from 'react-router';
+import { hashHistory }   from 'react-router';
 import { connect }          from 'react-redux';
 import { removeQuiz }       from '../actions/actions';
 
 class QuizItem extends Component {
   takeQuiz () {
-    browserHistory.push(`/quiz/${this.props.quiz.title}`);
+    hashHistory.push(`/quiz/${this.props.quiz.title}`);
   }
   addQuestion () {
-    browserHistory.push(`/addQuestion/${this.props.quiz.title}`);
+    hashHistory.push(`/addQuestion/${this.props.quiz.title}`);
   }
   editQuestion () {
-    browserHistory.push(`/editQuestion/${this.props.quiz.title}`);
+    hashHistory.push(`/editQuestion/${this.props.quiz.title}`);
   }
   removeQuiz (quiz) {
     if(confirm('Are you sure you want to remove this quiz?')){

@@ -11,10 +11,10 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <Nav />
-        {this.props.children}
-      </div>
+        <div>
+          <Nav />
+          {this.props.children}
+        </div>
     );
   }
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { browserHistory }   from 'react-router';
+import { hashHistory }   from 'react-router';
 import { addQuiz }          from '../actions/actions';
 
 class AddQuiz extends Component {
@@ -12,7 +12,7 @@ class AddQuiz extends Component {
       saved: false
     };
     this.props.dispatch(addQuiz(newQuiz));
-    browserHistory.push('/');
+    hashHistory.push('/');
   }
   render(){
     return (
