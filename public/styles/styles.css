@@ -26,7 +26,7 @@ ul {
   margin: 1em;
 }
 .nav {
-  height: 12vh;
+  height: 14vh;
 }
 .tooltip {
     position: relative;
@@ -69,8 +69,8 @@ body {
   background-color: black;
 }
 button {
-  height: 5vh;
-  width: 20vh;
+  height: 7vh;
+  width: 43vh;
   font-family: Roboto;
   font-size: 70%;
   border-radius: 5%;
