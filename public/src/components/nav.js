@@ -34,8 +34,8 @@ class Nav extends Component {
           <li>
             <div onClick={e => this.saveLocal(e)}><i className="fa fa-floppy-o fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Save Quizzes</span></i></div>
           </li>
+        {this.state.spinner ? <li><img className='spinner'src='https://shortpixel.com/img/spinner2.gif'/></li> : null}
         </ul>
-        {this.state.spinner ? <img className='spinner'src='https://shortpixel.com/img/spinner2.gif'/> : null}
         <hr/>
       </div>
     );

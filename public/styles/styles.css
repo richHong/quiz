@@ -1,16 +1,5 @@
 .spinner {
   height: 45px;
-  position: absolute;
-  top: 14%;
-  left: 28%;
-  
-}
-@media screen and (max-width: 480px) {
-    .spinner {
-      height: 45px;
-      top: 12%;
-      left: 58%;
-  }
 }
 .inputs {
   width: 50vw;
