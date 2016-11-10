@@ -72,7 +72,7 @@ class EditQuestion extends Component {
 }
 function mapStateToProps(state) {
   return {
-    quizzes: state
+    quizzes: state.quizzes
   }
 }
 export default connect(mapStateToProps)(EditQuestion);
