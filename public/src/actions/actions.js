@@ -9,7 +9,7 @@ export function getQuizList(){
       }, 
       error => {
         alert(error);
-        setTimeout(() => dispatch(getQuizList()), 2000);
+        setTimeout(() => dispatch(getQuizList()), 1000);
     });
   };
 }
