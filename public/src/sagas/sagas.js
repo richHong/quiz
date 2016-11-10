@@ -10,11 +10,10 @@ function* saveQuizList(action) {
       const count = yield call(saveQuizzes, action.quizzes);
       console.log(`Successful Save. #:${count}`);
       yield put(getQuizList());
-      yield put(spinnerInactive());
    } catch (e) {
       yield alert(e);
-      yield put(spinnerInactive());
    } finally {
+      yield put(spinnerInactive());
       console.log('End Save Request.');
    }
 }

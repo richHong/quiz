@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link }             from 'react-router';
 import { connect }          from 'react-redux';
-import { loadDemo, requestSave }      from '../actions/actions';
+import { loadDemo, requestSave, updateQuizList } from '../actions/actions';
 
 class Nav extends Component {
   saveLocal() {
@@ -10,7 +10,7 @@ class Nav extends Component {
   deleteLocal() {
     const answer = confirm('Are you sure you want to delete localStorage?');
     if (answer) window.localStorage.removeItem('quizzes');
-    window.location.reload();
+    this.props.dispatch(updateQuizList([]));
   }
   loadDemo () {
     this.props.dispatch(loadDemo());

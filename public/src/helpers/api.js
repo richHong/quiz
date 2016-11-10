@@ -16,8 +16,11 @@ export function saveQuizzes(quizzes) {
     const count = ++counter;
     console.log(`Start Save Request. #:${count}`);
     setTimeout(() => {
-      if (Math.random() < 0.1 || !quizzes) {
+      if (Math.random() < 0.1 ) {
         return reject(new Error('Failed to save quizzes. Please try saving again...'));
+      }
+      if (quizzes.length === 0 || !quizzes) {
+        return reject(new Error('No quizzes to save.'));
       }
       quizzes.forEach(quiz =>{
         quiz.saved = true;
