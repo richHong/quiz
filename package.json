@@ -29,6 +29,7 @@
     "redux-saga": "^0.12.1",
     "redux-thunk": "^2.1.0",
     "webpack": "^1.9.11",
+    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.9.1"
   },
   "devDependencies": {
