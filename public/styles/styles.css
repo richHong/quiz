@@ -27,6 +27,7 @@ ul {
 }
 .nav {
   height: 15vh;
+  margin-bottom: 3vh;
 }
 .nav-container {
   margin-top: 3vh;
@@ -70,7 +71,6 @@ ul {
 body {
   font-family: Roboto;
   background-color: black;
-  overflow: hidden;
 }
 button {
   height: 7vh;
