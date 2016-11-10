@@ -1,6 +1,6 @@
 import demoData from '../../data/demoData';
 
-export default function quizReducer (state = demoData, action){
+export default function quizReducer (state = [], action){
   switch (action.type) {
     case 'UPDATE_QUIZ_LIST':
       return action.quizList;
@@ -39,8 +39,10 @@ export default function quizReducer (state = demoData, action){
       });
     case 'REMOVE_QUIZ':
       return state.filter( quiz => {
-        return quiz.title !== action.quiz.title;
+        return quiz.id !== action.quiz.id;
       });
+    case 'LOAD_DEMO':
+      return [...state, ...demoData];
     default:
       return state;
   }

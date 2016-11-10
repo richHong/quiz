@@ -6,10 +6,12 @@ import { addQuiz }          from '../actions/actions';
 class AddQuiz extends Component {
   handleSubmit (e, title) {
     e.preventDefault();
-    let newQuiz = {
+    const num = Math.random() * 1000000;
+    const newQuiz = {
       title: title.value,
       questions:[],
-      saved: false
+      saved: false,
+      id: num
     };
     this.props.dispatch(addQuiz(newQuiz));
     hashHistory.push('/');

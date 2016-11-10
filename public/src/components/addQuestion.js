@@ -18,8 +18,8 @@ class AddQuestion extends Component {
   }
   handleSubmit (e, question, answer) {
     e.preventDefault();
-    let num = Math.random() * 1000000;
-    let newQuestion = {
+    const num = Math.random() * 1000000;
+    const newQuestion = {
       id: num,
       question: question.value,
       answer: answer.value

@@ -53,6 +53,17 @@ export function removeQuiz(quiz) {
     quiz
   };
 }
+export function loadDemo() {
+  return {
+    type: 'LOAD_DEMO'
+  };
+}
+export function requestSave(quizzes) {
+  return {
+    type: 'SAVE_REQUESTED', 
+    quizzes
+  };
+}
 export function spinnerActive() {
   return {
     type: 'SPINNER_ACTIVE'
