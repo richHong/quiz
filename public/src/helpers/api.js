@@ -14,7 +14,7 @@ export function getQuizzes() {
 export function saveQuizzes(quizzes) {
   return new Promise((resolve, reject) => {
     const count = ++counter;
-    console.log(`Start Save Request. #: ${count}`);
+    console.log(`Start Save Request. #:${count}`);
     setTimeout(() => {
       if (Math.random() < 0.1 || !quizzes) {
         return reject(new Error('Failed to save quizzes. Please try saving again...'));

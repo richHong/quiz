@@ -8,7 +8,7 @@ function* saveQuizList(action) {
    try {
       yield put(spinnerActive());
       const count = yield call(saveQuizzes, action.quizzes);
-      console.log(`Successful Save. #: ${count}`);
+      console.log(`Successful Save. #:${count}`);
       yield put(getQuizList());
       yield put(spinnerInactive());
    } catch (e) {
