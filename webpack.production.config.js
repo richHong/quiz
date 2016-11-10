@@ -7,7 +7,7 @@ var config = {
 
   // We change to normal source mapping
   devtool: 'source-map',
-  entry: './index.js',
+  entry: ['babel-polyfill','./index.js'],
   output: {
     path: buildPath,
     filename: 'bundle.js'
@@ -28,7 +28,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel?presets[]=react,presets[]=es2015',
+        loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0',
         exclude: '/node_modules'
       },
       //This converts our .css into JS
