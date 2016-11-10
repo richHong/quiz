@@ -7,7 +7,7 @@ class QuizList extends Component {
     return (
       <div>
         {!localQuizzes && !this.props.quizzes.length ? null : 
-          localQuizzes && !this.props.quizzes.length ? <img className='loader' src='https://www.robtaber.com.au/img/ajax-loader.gif'/> : 
+          localQuizzes && !this.props.quizzes.length ? <img className='loader' src='http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif'/> : 
           this.props.quizzes.map( (quiz, i) => {
           return (
             <QuizItem key={i} quiz={quiz} />
