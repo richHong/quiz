@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, hashHistory} from 'react-router';
 
 import rootReducer from './public/src/reducers/root';
-import mySaga      from './public/src/sagas/sagas';
+import {saveSaga, conSaga} from './public/src/sagas/sagas';
 
 import App  from './public/src/components/app';
 import Nav  from './public/src/components/nav';
@@ -19,7 +19,8 @@ import EditQuestion from './public/src/components/editQuestion';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(thunk), applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(saveSaga);
+sagaMiddleware.run(conSaga);
 
 render(<Provider store={ store }>
         <Router history={ hashHistory }>

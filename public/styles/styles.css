@@ -23,7 +23,8 @@ ul {
 }
 .nav li {
   float: left;
-  margin: 1em;
+  margin-top: 1.5em;
+  margin-right: 1.75em;
 }
 .nav {
   height: 15vh;

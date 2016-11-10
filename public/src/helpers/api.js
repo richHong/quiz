@@ -17,10 +17,10 @@ export function saveQuizzes(quizzes) {
     console.log(`Start Save Request. #:${count}`);
     setTimeout(() => {
       if (Math.random() < 0.1 ) {
-        return reject(new Error('Failed to save quizzes. Please try saving again...'));
+        return reject(new Error('Failed to save quizzes. Please try saving again...'), count);
       }
       if (quizzes.length === 0 || !quizzes) {
-        return reject(new Error('No quizzes to save.'));
+        return reject(new Error('No quizzes to save.'), count);
       }
       quizzes.forEach(quiz =>{
         quiz.saved = true;

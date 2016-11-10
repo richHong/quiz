@@ -64,6 +64,12 @@ export function requestSave(quizzes) {
     quizzes
   };
 }
+export function requestConSave(quizzes) {
+  return {
+    type: 'CONCURRENT_SAVE_REQUESTED', 
+    quizzes
+  };
+}
 export function spinnerActive() {
   return {
     type: 'SPINNER_ACTIVE'

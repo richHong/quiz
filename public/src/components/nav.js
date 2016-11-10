@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link }             from 'react-router';
 import { connect }          from 'react-redux';
-import { loadDemo, requestSave, updateQuizList } from '../actions/actions';
+import { loadDemo, requestSave, requestConSave, updateQuizList } from '../actions/actions';
 
 class Nav extends Component {
   saveLocal() {
     this.props.dispatch(requestSave(this.props.quizzes));
+  }
+  conSaveLocal() {
+    this.props.dispatch(requestConSave(this.props.quizzes));
   }
   deleteLocal() {
     const answer = confirm('Are you sure you want to delete localStorage?');
@@ -30,6 +33,9 @@ class Nav extends Component {
           <li>
             <div onClick={e => this.saveLocal()}><i className="fa fa-floppy-o fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Save Quizzes</span></i></div>
           </li>
+          {/*<li>
+            <div onClick={e => this.conSaveLocal()}><i className="fa fa-life-ring fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Concurrent Save</span></i></div>
+          </li> */}
           <li>
             <div onClick={e => this.deleteLocal()}><i className="fa fa-trash fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Delete Storage</span></i></div>
           </li>
