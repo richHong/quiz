@@ -16,7 +16,7 @@ class Nav extends Component {
     this.props.dispatch(loadDemo());
   }
   render() {
-    var demo = this.props.quizzes.filter(quiz => quiz.title === 'Presidents of the USA' || quiz.title === 'US Capitols');
+    const demo = this.props.quizzes.filter(quiz => quiz.title === 'Presidents of the USA' || quiz.title === 'US Capitols');
     return (
       <div className='nav-container'>
         <h1>The Quiz Game</h1>

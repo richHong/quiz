@@ -100,3 +100,6 @@ input[type='text'] {
   font-family: Roboto;
   font-size: 2vh;
 }
+.loader {
+  height: 40vh;
+}
