@@ -6,7 +6,6 @@ import { loadDemo, requestSave }      from '../actions/actions';
 class Nav extends Component {
   saveLocal() {
     this.props.dispatch(requestSave(this.props.quizzes));
-  
   }
   deleteLocal() {
     const answer = confirm('Are you sure you want to delete localStorage?');
@@ -17,6 +16,7 @@ class Nav extends Component {
     this.props.dispatch(loadDemo());
   }
   render() {
+    var demo = this.props.quizzes.filter(quiz => quiz.title === 'Presidents of the USA' || quiz.title === 'US Capitols');
     return (
       <div className='nav-container'>
         <h1>The Quiz Game</h1>
@@ -33,9 +33,10 @@ class Nav extends Component {
           <li>
             <div onClick={e => this.deleteLocal()}><i className="fa fa-trash fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Delete Storage</span></i></div>
           </li>
-          <li>
-            <div onClick={e => this.loadDemo()}><i className="fa fa-smile-o fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Load Demo</span></i></div>
-          </li>
+          { demo.length > 0 ? null :
+            <li>
+              <div onClick={e => this.loadDemo()}><i className="fa fa-smile-o fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Load Demo</span></i></div>
+            </li> }
         {this.props.spinner ? <li><img className='spinner'src='https://shortpixel.com/img/spinner2.gif'/></li> : null}
         </ul>
         <hr/>
