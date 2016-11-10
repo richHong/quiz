@@ -28,6 +28,9 @@ ul {
 .nav {
   height: 15vh;
 }
+.nav-container {
+  margin-top: 3vh;
+}
 .tooltip {
     position: relative;
     display: inline-block;
