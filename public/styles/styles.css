@@ -67,6 +67,7 @@ ul {
 body {
   font-family: Roboto;
   background-color: black;
+  overflow: hidden;
 }
 button {
   height: 7vh;
