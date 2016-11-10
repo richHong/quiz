@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { Link }             from 'react-router';
 import { connect }          from 'react-redux';
-import { saveQuizList }      from '../actions/actions';
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      spinner: false,
-    };
-  }
   saveLocal(e) {
     e.preventDefault();
-    this.setState({spinner:true}, () => {
-      this.props.dispatch(saveQuizList(this.props.quizzes))
-      .then(() => {
-        this.setState({spinner:false});
-      });
-    });
+    this.props.dispatch({type: 'SAVE_REQUESTED', quizzes: this.props.quizzes});
+  
   }
   render() {
     return (
@@ -33,7 +22,7 @@ class Nav extends Component {
           <li>
             <div onClick={e => this.saveLocal(e)}><i className="fa fa-floppy-o fa-3x tooltip" aria-hidden="true"><span className="tooltiptext">Save Quizzes</span></i></div>
           </li>
-        {this.state.spinner ? <li><img className='spinner'src='https://shortpixel.com/img/spinner2.gif'/></li> : null}
+        {this.props.spinner ? <li><img className='spinner'src='https://shortpixel.com/img/spinner2.gif'/></li> : null}
         </ul>
         <hr/>
       </div>
@@ -42,7 +31,8 @@ class Nav extends Component {
 };
 function mapStateToProps(state){
   return {
-    quizzes: state
+    quizzes: state.quizzes,
+    spinner: state.spinner
   }
 }
 export default connect (mapStateToProps)(Nav);

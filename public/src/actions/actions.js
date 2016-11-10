@@ -1,40 +1,5 @@
-function getQuizzes() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() < 0.1) {
-        return reject(new Error('Failed to get quizzes. Attempting to connect again...'));
-      }
-      let quizList = JSON.parse(window.localStorage.getItem('quizzes'));
-      return resolve(quizList);
-    }, Math.random() * 1000);
-  });
-}
-function saveQuizzes(quizzes) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() < 0.1 || !quizzes) {
-        return reject(new Error('Failed to save quizzes. Please try saving again...'));
-      }
-      quizzes.forEach(quiz =>{
-        quiz.saved = true;
-      });
-      window.localStorage.setItem('quizzes', JSON.stringify(quizzes));
-      return resolve();
-    }, Math.random() * 1000);
-  });
-}
-export function saveQuizList(quizzes){
-  return dispatch => {
-    return saveQuizzes(quizzes)
-    .then(
-      () => {
-        dispatch(getQuizList());
-      }, 
-      error => {
-        alert(error);
-    });
-  };
-}
+import { getQuizzes } from '../helpers/api';
+
 export function getQuizList(){
   return dispatch => {
     return getQuizzes()
@@ -86,5 +51,15 @@ export function removeQuiz(quiz) {
   return {
     type: 'REMOVE_QUIZ',
     quiz
+  };
+}
+export function spinnerActive() {
+  return {
+    type: 'SPINNER_ACTIVE'
+  };
+}
+export function spinnerInactive() {
+  return {
+    type: 'SPINNER_INACTIVE'
   };
 }

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import thunk                from 'redux-thunk';
 import { render }           from 'react-dom';
 import { Provider }         from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, hashHistory} from 'react-router';
 
-import quizReducer from './public/src/reducers/root';
+import rootReducer from './public/src/reducers/root';
+import mySaga      from './public/src/sagas/sagas';
 
 import App  from './public/src/components/app';
 import Nav  from './public/src/components/nav';
@@ -15,7 +17,9 @@ import AddQuiz      from './public/src/components/addQuiz';
 import AddQuestion  from './public/src/components/addQuestion';
 import EditQuestion from './public/src/components/editQuestion';
 
-let store = createStore(quizReducer, applyMiddleware(thunk));
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(thunk), applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(mySaga);
 
 render(<Provider store={ store }>
         <Router history={ hashHistory }>

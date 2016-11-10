@@ -6,6 +6,7 @@ module.exports = {
   //fastest rebuild and build speed
   devtool: 'eval', 
   entry: [
+    'babel-polyfill',
     //for hot style updates
     'webpack/hot/dev-server',
     //refreshes the browser when it can't hot update
@@ -25,7 +26,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'stage-1']
         },
         exclude: '/node_modules'
       },
